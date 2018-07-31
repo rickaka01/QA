@@ -1,0 +1,13 @@
+D:\vs2013Projects\QA\QAMvc\bin\QAMvc.dll.config
+D:\vs2013Projects\QA\QAMvc\bin\QAMvc.dll
+D:\vs2013Projects\QA\QAMvc\bin\QAMvc.pdb
+D:\vs2013Projects\QA\QAMvc\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\vs2013Projects\QA\QAMvc\bin\Newtonsoft.Json.dll
+D:\vs2013Projects\QA\QAMvc\bin\QA.DB.dll
+D:\vs2013Projects\QA\QAMvc\bin\System.Web.Mvc.dll
+D:\vs2013Projects\QA\QAMvc\bin\Utility.DB.dll
+D:\vs2013Projects\QA\QAMvc\bin\Utility.DB.pdb
+D:\vs2013Projects\QA\QAMvc\bin\QA.DB.pdb
+D:\vs2013Projects\QA\QAMvc\obj\Debug\QAMvc.csprojResolveAssemblyReference.cache
+D:\vs2013Projects\QA\QAMvc\obj\Debug\QAMvc.dll
+D:\vs2013Projects\QA\QAMvc\obj\Debug\QAMvc.pdb

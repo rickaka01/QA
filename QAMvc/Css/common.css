@@ -1,0 +1,20 @@
+﻿body {
+    font-size: 9pt;
+}
+
+.align-center {
+    position: fixed;
+    left: 15%;
+    top: 20%;
+    right:15%;
+    padding: 80pt 10pt 80pt 10pt;
+    border: solid 1px yellow;
+    background-color:#b9edfb;
+    text-align: center;
+}
+
+/*
+input {
+    height: 25px;
+    margin: 5px;
+}*/

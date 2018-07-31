@@ -1,0 +1,65 @@
+﻿<html>
+<head>
+    <title>登录</title>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <style type="text/css">
+        @import url('/css/common.css');
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //检查浏览器是否支持本地存储
+            /*
+            if (window.localStorage) {
+                alert('This browser supports localStorage');
+            } else {
+                alert('This browser does NOT support localStorage');
+            }
+            */
+            window.localStorage["sessionID"]="";
+            window.sessionStorage["sessionID"] = "";
+            window.sessionStorage["userID"] = "";
+            $("#btnOK").click(function () { DoOK(); });
+            $("#btnReg").click(function () { window.location = "register.html" });
+        });
+
+        function DoOK() {
+            var u1 = $("#p1").val();
+            var u2 = $("#p2").val();
+           
+            //调用登录页面
+                var url = '/api/Login/Login?p1='+u1+'&p2='+u2;
+                $.ajax({
+                    url: url,
+                    contentType: "application/json",
+                    dataType: "json",
+                    method: "post",
+                    async: true,
+                    data: "{}", 
+                    success: function (result) {
+                        if (result != "" && result.Key!="" && result.Key!=null) {
+                            window.sessionStorage["userID"] = result.Key;
+                            window.sessionStorage["sessionID"] = result.Value;
+                            window.sessionStorage["userCode"] = u1;
+                            $(window).attr('location', 'main.html');
+                        }
+                        else {
+                            alert("帐号密码不正确!")
+                        }
+                    },
+                    error: function (request, error) {
+                        alert(error);
+                    }
+                });
+
+            
+        }
+    </script>
+</head>
+<body>
+    <div class="align-center">
+        <div>帐号:<input type="text" id="p1"/></div>
+        <div>密码:<input type="password" id="p2" /></div>
+        <div><input type="button" value="登录" id="btnOK" /><input type="button" value="注册" id="btnReg" /></div>
+    </div>
+</body>
+</html>

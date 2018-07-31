@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>分类</title>
+    <style type="text/css">
+        li {
+            list-style-type:none;
+            float:left;
+            width : 100px;
+            height :100px;
+            border : solid 1px #808080;
+            text-align:match-parent;
+            padding-left :50px;
+            margin-left : 20px;
+            background-color : #b6ff00;
+            line-height:100px;
+        }
+
+        a {
+            text-decoration:none;
+        }
+    </style>
+        <script src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            DoOK();
+        });
+
+        function ShowData(result) {
+            var s = "";
+            for (var i = 0; i < result.length; i++) {
+                var item = result[i];
+                s += "<li>";
+                s += "<a href='Article.html?cid=" + item.ID + "&cname=" + escape(item.Name) + "'>";
+                s += item.Name;
+                s += "</li>";
+                s += "\r\n";
+            }
+            s += "<li><a href='newcatalog.html'>++++</a></li>";
+            $("#content").html(s);
+        }
+
+        function DoOK() {
+            var url = "/api/Catalog/List";
+            $.ajax({
+                url: url,
+                contentType: "application/json",
+                dataType: "json",
+                method: "post",
+                async: true,
+                data: "{}",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("sessionID", window.sessionStorage["sessionID"]);
+                },
+                success: function (result) {
+                    ShowData(result);
+                },
+                error: function (request, error) {
+                    alert(error + "-1");
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <div id="content">
+
+    </div>
+</body>
+</html>

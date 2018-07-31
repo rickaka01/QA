@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>分类</title>
+    <style type="text/css">
+        li {
+            list-style-type: none;
+            float: left;
+            width: 100px;
+            height: 100px;
+            border: solid 1px #808080;
+            text-align: match-parent;
+            padding-left: 50px;
+            margin-left: 20px;
+            background-color: #b6ff00;
+            line-height: 100px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            DoOK();
+        });
+
+        function ShowData(result) {
+            var s = "";
+            for (var i = 0; i < result.length; i++) {
+                var item = result[i];
+                s += "<li><a href='Task.html?cid=" + item.ID + "'>" + item.Name + "</li>\r\n";
+            }
+            $("#content").html(s);
+        }
+
+        function DoOK() {
+            var url = "/api/Catalog/List";
+            $.ajax({
+                url: url,
+                contentType: "application/json",
+                dataType: "json",
+                method: "post",
+                async: true,
+                data: "{}",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("sessionID", window.sessionStorage["sessionID"]);
+                    xhr.setRequestHeader("userID", window.sessionStorage["userID"]);
+                },
+                success: function (result) {
+                    ShowData(result);
+                },
+                error: function (request, error) {
+                    alert(error + "-1");
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <div id="content">
+    </div>
+</body>
+</html>

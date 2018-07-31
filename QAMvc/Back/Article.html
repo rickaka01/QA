@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/common.js"></script>
+    <style type="text/css">
+        body {
+            font-size: 9pt;
+        }
+        input[type="text"] {
+            height:18px;
+            margin-left:10px;
+            width:500px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //DoReset();
+            DoInit();
+            $("#btnOK").click(function () { DoOK(); });
+            $("#btnReturn").click(function () { window.location = 'cataloglist.html'; });
+        });
+
+        function DoInit() {
+            $("#lbl").text(getAllQueryResolveString().cname);
+        }
+
+        function DoReset() {
+            $("#Title").val("");
+            $("#A").val("");
+            $("#B").val("");
+            $("#C").val("");
+            $("#D").val("");
+            $("#Answer").val("");
+        }
+
+        function DoOK() {
+            var url = "/api/Article/Create";
+            var v1 = $("#Title").val();
+            var v2 = $("#A").val();
+            var v3 = $("#B").val();
+            var v4 = $("#C").val();
+            var v5 = $("#D").val();
+            var v = $("#Answer").val();
+
+            var s = "";
+            s += "{";
+            s += "\"id\":\"" + getAllQueryResolveString().cid + "\",";
+            s += "\"p\":\"" + v1 + "\",";
+            s += "\"p1\":\"" + v2 + "\",";
+            s += "\"p2\":\"" + v3 + "\",";
+            s += "\"p3\":\"" + v4 + "\",";
+            s += "\"p4\":\"" + v5 + "\"";
+            s += ",\"p5\":\"" + v +"\"";
+            s += "}";
+
+            //alert(s);
+            
+            //return;
+          
+            $.ajax({
+                url: url,
+                contentType: "application/json",
+                dataType: "json",
+                method: "post",
+                async: true,
+                data: s,
+                //beforeSend: function (xhr) {
+                //    xhr.setRequestHeader("sessionID", window.sessionStorage["sessionID"]);
+                //},
+                success: function (result) {
+                    if (result == true) {
+                        alert("操作成功!");
+                        DoReset();
+                    }
+                    else {
+                        alert("操作失败!");
+                    }
+                },
+                error: function (request, error) {
+                    alert(error + "-1");
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <table>
+        <tbody>
+            <tr><td>分-类:<label id="lbl"></label></td></tr>
+            <tr><td>主-题 :<input type="text" id="Title" /></td></tr>
+            <tr><td>内容A:<input type="text" id="A" /></td></tr>
+            <tr><td>内容B:<input type="text" id="B"/></td></tr>
+            <tr><td>内容C:<input type="text" id="C"/></td></tr>
+            <tr><td>内容D:<input type="text" id="D"/></td></tr>
+            <tr><td>正确项:
+                <select id="Answer">
+                <option value="" selected> </option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                    </select>
+
+                </td></tr>
+            <tr><td><input type="button" id="btnOK" value="保存" />
+                <input type="button" id="btnReturn" value="返回"/>
+                </td></tr>
+        </tbody>
+    </table>
+</body>
+</html>

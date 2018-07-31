@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>得分</title>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/common.js"></script>
+    <style type="text/css">
+        @import url('/css/common.css');
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ShowData();
+            $("#continue").click(function () { window.location = "catalog.html" });
+            $("#return").click(function () { window.location = "main.html" });
+        });
+        function ShowData() {
+            var url = "/api/Task/Score?tid=" + getAllQueryResolveString().tid;
+            $.ajax({
+                url: url,
+                contentType: "application/json",
+                dataType: "json",
+                method: "post",
+                async: true,
+                data: "{}",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("sessionID", window.sessionStorage["sessionID"]);
+                    xhr.setRequestHeader("userID", window.sessionStorage["userID"]);
+                },
+                success: function (result) {
+                        $("#t").append(result.Key);
+                        $("#c").append(result.Value);
+                },
+                error: function (request, error) {
+                    alert(error + "-1");
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="align-center">
+    <div>恭喜</div>
+    <div id="c">本次积分:</div>
+    <div id="t">总积分:</div>
+    <div>
+        <input type="button" id="continue" value="意犹未尽"/>
+        <input type="button" id="return" value="有点累了" />
+    </div>
+    </div>
+</body>
+</html>

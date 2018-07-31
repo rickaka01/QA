@@ -1,0 +1,7 @@
+D:\vs2013Projects\QA\QA.DB\bin\Debug\QA.DB.dll
+D:\vs2013Projects\QA\QA.DB\bin\Debug\QA.DB.pdb
+D:\vs2013Projects\QA\QA.DB\bin\Debug\Utility.DB.dll
+D:\vs2013Projects\QA\QA.DB\bin\Debug\Utility.DB.pdb
+D:\vs2013Projects\QA\QA.DB\obj\Debug\QA.DB.csprojResolveAssemblyReference.cache
+D:\vs2013Projects\QA\QA.DB\obj\Debug\QA.DB.dll
+D:\vs2013Projects\QA\QA.DB\obj\Debug\QA.DB.pdb

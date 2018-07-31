@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <style type="text/css">
+        @import url('/css/common.css');
+    </style>
+    <title>注册</title>
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnOK").click(function () {
+                DoOK();
+            });
+        });
+
+        function DoOK() {
+            var uid = $("#uid").val();
+            var pid1 = $("#pid1").val();
+            var pid2 = $("#pid2").val();
+
+            var s = "{";
+            s+="\"u\":\""+ uid +"\",";
+            s+="\"p\":\""+ pid1 +"\"";
+            s+="}";
+
+            var url = '/api/Login/reg';
+            $.ajax({
+                url: url,
+                contentType: "application/json",
+                dataType: "json",
+                method: "post",
+                async: true,
+                data: s,
+                success: function (result) {
+                    if (result == "") {
+                        $(window).attr('location', 'login.html');
+                    }
+                    else {
+                        alert(result);
+                    }
+                },
+                error: function (request, error) {
+                    alert(error);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="align-center">
+        <div>请输入帐号:<input id="uid" type="text" /></div>
+        <div>请输入密码:<input id="pid1" type="password" /></div>
+        <div>再输入密码:<input id="pid2" type="password" /></div>
+        <div><input type="button" id="btnOK" value="注册" /></div>
+    </div>
+</body>
+</html>
